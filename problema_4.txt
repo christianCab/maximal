@@ -1,0 +1,52 @@
+program PROBLEMA_4;
+{$codepage utf8}
+var
+    a,b,max,i:integer;
+procedure validarEntrada(var a,b:integer);
+    var
+        aux:integer;
+    begin
+        if(a>b)then
+            begin
+            aux:=a;
+            a:=b;
+            b:=aux;
+            end;
+    end;
+function aparece(dig,num:integer):integer;
+    var
+        ultimo,cant:integer;
+    begin
+    cant:=0;
+    while(num<>0)do
+        begin
+        ultimo:=num MOD 10;
+        num:=num div 10;
+        if(ultimo=dig)then
+            cant:=cant + 1;
+        end;
+    aparece:=cant;
+    end;
+function maximal(num:integer):integer;
+    var
+        max,cant,i,dig:integer;
+    begin
+        max:=0;
+        for dig:=9 downto 0 do
+            begin
+            cant:=aparece(dig,num);
+            for i:=1 to cant do
+                max:=max*10+dig;
+            end;
+        maximal:=max;
+    end;
+begin
+    write('Ingrese dos números náturales: '); readln(a,b);
+    validarEntrada(a,b);
+    for i:=a to b do
+        begin
+        max:=maximal(i);
+        write(max,' ');
+        end;       
+    readln; 
+end.
